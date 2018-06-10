@@ -10,7 +10,11 @@ function View({ name }) {
       var path = `${name}/_${row}_${column}.png`
       return <img className="tile" src={path} />
     })
-  return <div className="container">{tiles}</div>
+  return (
+    <div className="container">
+      <div className="image">{tiles}</div>
+    </div>
+  )
 }
 
 function applyBehavior(Image) {
