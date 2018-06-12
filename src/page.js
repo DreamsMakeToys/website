@@ -38,9 +38,11 @@ var IMAGES = [
 
 function View(props) {
   return (
-    <div className={Styles.container}>
+    <div className={Styles.rootContainer}>
       <div className={Styles.header}>DreamsMakeToys</div>
       <Image
+        attachRef={props.attachImageRef}
+        size={props.imageSize}
         name={props.name}
         isLoading={props.isLoading}
         onTileLoad={props.onTileLoad}
@@ -58,9 +60,10 @@ function View(props) {
 function Image(props) {
   var tiles = createTiles(props.name, 5, props.isLoading, props.onTileLoad)
   return (
-    <div className={Styles.imageContainer}>
-      <div className={Styles.image}>{tiles}</div>
-      {/* <div className={Styles.loader} /> */}
+    <div className={Styles.imageContainer} style={props.size}>
+      <div ref={props.attachRef} className={Styles.image}>
+        {tiles}
+      </div>
     </div>
   )
 }
@@ -74,8 +77,8 @@ function createTiles(name, resolution, isLoading, onLoad) {
       var column = i % resolution
       var key = `_${row}_${column}`
       var path = `${name}/${key}.png`
-      var imageLoaded = () => onLoad(key)
-      var attachOnLoad = node => (node.onload = imageLoaded)
+      var tileLoaded = () => onLoad(key)
+      var attachOnLoad = node => (node.onload = tileLoaded)
       return <img className={className} src={path} ref={attachOnLoad} />
     })
 }
@@ -124,19 +127,28 @@ function applyBehavior(Page) {
       super()
       this.loadingTiles = createTileKeys(5)
       this.state = {
+        imageSize: null,
         selectedIndex: 0,
         loading: true
       }
+      this._attachImageRef = this._attachImageRef.bind(this)
       this._next = this._next.bind(this)
       this._prev = this._prev.bind(this)
       this._onTileLoad = this._onTileLoad.bind(this)
     }
 
+    componentDidMount() {
+      this._updateImageSize()
+      window.addEventListener('resize', this._updateImageSize.bind(this))
+    }
+
     render() {
-      var { selectedIndex, loading } = this.state
+      var { imageSize, selectedIndex, loading } = this.state
       var { name, group } = IMAGES[selectedIndex]
       return (
         <Page
+          attachImageRef={this._attachImageRef}
+          imageSize={imageSize}
           name={name}
           isLoading={loading}
           onTileLoad={this._onTileLoad}
@@ -146,6 +158,18 @@ function applyBehavior(Page) {
           previous={this._prev}
         />
       )
+    }
+
+    _attachImageRef(node) {
+      this._image = node
+    }
+
+    _updateImageSize() {
+      this.setState({ imageSize: null }, () => {
+        var { width } = this._image.getBoundingClientRect()
+        var imageSize = { width, height: width }
+        this.setState({ imageSize })
+      })
     }
 
     _next() {
