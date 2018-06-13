@@ -41,7 +41,7 @@ function createTiles(name, resolution, onLoad) {
       var row = parseInt(i / resolution)
       var column = i % resolution
       var key = `_${row}_${column}`
-      var path = `${name}/${key}.png`
+      var path = `https://raw.githubusercontent.com/DreamsMakeToys/website/master/images/${name}/${key}.png`
       var tileLoaded = () => onLoad(key)
       var attachOnLoad = node => {
         if (node) node.onload = tileLoaded

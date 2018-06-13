@@ -19,6 +19,7 @@
     "style-loader": "^0.21.0"
   },
   "scripts": {
-    "start:dev": "webpack-dev-server --mode development"
+    "start:dev": "webpack-dev-server --mode development",
+    "build:prod": "webpack --mode production"
   }
 }
