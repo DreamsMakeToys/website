@@ -1,0 +1,76 @@
+.container {
+  flex: 1 0 auto;
+}
+
+.spinner {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 1vmax;
+  overflow: hidden;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.tile {
+  width: 20%;
+  height: 20%;
+  border-width: 0;
+}
+
+/*!
+ * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)
+ * Copyright 2015 Daniel Cardoso <@DanielCardoso>
+ * Licensed under MIT
+ */
+
+.laBallScaleMultiple {
+  position: relative;
+  width: 8vmax;
+  height: 8vmax;
+}
+
+.laBallScaleMultiple > div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8vmax;
+  height: 8vmax;
+  display: inline-block;
+  background-color: currentColor;
+  opacity: 0;
+  border: 0 solid currentColor;
+  border-radius: 100%;
+  animation: ball-scale-multiple 1s 0s linear infinite;
+}
+
+.laBallScaleMultiple > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.laBallScaleMultiple > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes ball-scale-multiple {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  5% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}

@@ -11,7 +11,7 @@ body:global {
   flex-direction: column;
 }
 
-.rootContainer {
+.root {
   position: absolute;
   left: 0;
   top: 0;
@@ -22,58 +22,41 @@ body:global {
 }
 
 .header {
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  display: flex;
   padding: 1vmax;
   padding-bottom: 0;
-  font-size: 5vmax;
+  font-size: 4.5vmax;
   font-weight: bold;
-}
-
-.imageContainer {
-  padding: 1.5vmax;
 }
 
 .image {
+  flex: 0 0 auto;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  border-radius: 1vmax;
-  overflow: hidden;
-}
-
-.tile {
-  width: 20%;
-  height: 20%;
-  border-width: 0;
-  z-index: 1;
-}
-
-.loading {
-  display: none;
+  padding: 1.5vmax;
 }
 
 .info {
-  flex-grow: 1;
-}
-
-.label {
-  padding-left: 2vmax;
-  font-size: 4vmax;
-  font-style: italic;
-}
-
-.navbar {
-  flex-shrink: 0;
-  padding: 3vmax;
-  padding-bottom: 2vmax;
+  flex: 1 0 auto;
   display: flex;
-  flex-direction: row;
-  font-size: 4.5vmax;
-  font-weight: bold;
+  flex-direction: column;
+  padding: 2vmax;
+  padding-top: 0;
+  font-size: 4.25vmax;
   font-style: italic;
+}
+
+.footer {
+  flex: 0 0 auto;
+  display: flex;
+  padding: 2.5vmax;
+  padding-bottom: 1.5vmax;
 }
 
 .button {
+  font-size: 4.25vmax;
+  font-weight: bold;
+  font-style: italic;
   cursor: pointer;
 }
 
@@ -82,6 +65,6 @@ body:global {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 400;
-  font-size: 3.5vmax;
+  font-size: 4.25vmax;
+  font-style: italic;
 }
